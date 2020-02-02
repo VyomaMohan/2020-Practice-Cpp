@@ -30,8 +30,12 @@ class Book{
 int main(){
 	int i,n,op;
 	int flag=1;
-	Book A,books[20];
+	Book books[20];
+	
+	//File stream
 	fstream filestr("book.dat",ios::binary|ios::app);
+	
+	//Getting the first set of books
 	cout<<"No of records to enter";
 	cin>>n;
 	for(i=0;i<n;i++){
@@ -39,22 +43,32 @@ int main(){
 		filestr.write((char*)&books[i],sizeof(books[i]));
 	}
 	
+	//While loop stat=rts
 	while(flag){
-		cout<<"\n1. Display 2.Add book 3.Exit";
+	//Get the option
+	cout<<"\n1. Display 2.Add book 3.Exit";
 	cin>>op;
 	
+	//Switchcase of the options
 	switch(op){
+		
+		//Display all the books that exist in the file
 		case 1:
 		for(i=0;i<n;i++){
 		filestr.read((char*)&books[i],sizeof(books[i]));
 		books[i].dispbook();
 		}
 		break;
+		
+		//Add a book to the file
 		case 2:
+			//Add the book in the last index
 			books[n].getBook();
 			filestr.write((char*)&books[n],sizeof(books[n]));
+			//Increment the index
 			n=n+1;
 		break;
+		//Exit the program
 		case 3:
 			flag=0;
 		break;
@@ -62,7 +76,6 @@ int main(){
 	
 	
 	}
-	
 	
 	
 }
